@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
@@ -19,19 +19,39 @@ require('dotenv').config();
 //   database: "ssip",
 //   insecureAuth: true,
 // });
-var pool = mysql.createConnection({
+var pool = mysql.createPool({
   host: process.env.DB_HOST,
-  port:process.env.PORT,
+  port:process.env.port,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DBNAME,
   insecureAuth: true,
+  waitForConnections:true,
+  connectionLimit:10,
+  queueLimit:0
 });
+// var pool = mysql.createPool({
+//   host: "buvlyychyhv0fzgxfbd6-mysql.services.clever-cloud.com",
+ 
+//   user: "ulcggsx2b1cubz6m",
+//   password: "tqUogiSfpZUEtKtoh8Tm",
+//   database:"buvlyychyhv0fzgxfbd6",
+//   insecureAuth: true,
 
-pool.connect(function (err) {
+//   waitForConnections:true,
+//   connectionLimit:10,
+//   queueLimit:0
+// });
+
+pool.getConnection((err,conn)=>{
   if (err) throw err;
   console.log("Connected!");
-});
+})
+
+// pool.connect(function (err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
 
 app.get("/", (req, res) => {
   res.redirect("/employee/test");
