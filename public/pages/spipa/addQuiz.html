@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="../js/login.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+<style>
+  select>option {
+    margin-top: 8px !important;
+  }
+
+  .container {
+    border-radius: 10px;
+    padding: 10px 30px 30px;
+    margin-top: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 45%;
+  }
+
+  .dept_signin,
+  .dept_login {
+    width: 100px;
+  }
+
+  .dept_login {
+    margin-left: 3%;
+  }
+  .improve{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .option{
+    background-color: gray;
+    border: 1px solid black;
+    margin-top: 4px;
+  padding:7px 7px;
+   text-align: center;
+  }
+</style>
+
+<body>
+    <form method="post"> 
+  <div class="container">
+    <p style="font-size: 4rem;margin: 20px 0;text-align: center;font-weight: 600;">Question Adder: </p>
+    
+      <div class="form-group">
+        <label for="dept_emp_name"> Question:</label>
+        <!-- <input class="form-control" id="ques" type="text" placeholder="Enter Your Question Here" name="quetion_title" required> -->
+        <textarea class="form-control" id="ques" type="text" placeholder="Enter Your Question Here" name="question_title" required></textarea>
+      </div>
+      <div class="form-group improve">
+        <label for="dept_emp_email" class="option">A:</label>
+        <input class="form-control" id="ques_opt" type="text" placeholder="Enter Option A" name="optionA" required>
+      </div>
+      <div class="form-group improve">
+        <label for="dept_emp_email" class="option">B:</label>
+        <input class="form-control" id="ques_opt1" type="text" placeholder="Enter Option B" name="optionB" required>
+      </div>
+      <div class="form-group improve">
+        <label for="dept_emp_email" class="option">C:</label>
+        <input class="form-control" id="ques_opt2" type="text" placeholder="Enter Option C" name="optionC" required>
+      </div>
+      <div class="form-group improve">
+        <label for="dept_emp_email" class="option">D:</label>
+        <input class="form-control" id="ques_opt3" type="text" placeholder="Enter Option D" name="optionD" required>
+      </div>
+      <div class="form-group">
+        <label for="dept_emp_email">Question Answer: </label>
+        <input class="form-control" id="ques_ans" type="text" placeholder="Enter Answer in A/B/C/D form" name="question_answer" required>
+      </div>
+   
+    
+      <div class="form-group" style="padding-left: 0;">
+        <label for="dept_role" class="form-label" style="margin-bottom: 0 !important;">Question Domain:</label>
+        <select class="form-select form-control" id="dept_role" name="question_domain">
+          <option>Apno Taluko Vibrant Taluko</option>
+<!-- 
+          "Apno Taluko Vibrant Taluko","Budget","Climate Change","Departmental Inquiry Procedures","Development Communications","Interpersonal Relationships"
+          ,"Office Procedures","Stress Management","Team Building & Motivation","Training on Behavioral Aspects","	Planning Effective Implementation of MGNREGA",
+      "Retirement Benefits for Government Employees" -->
+
+          <option>
+              Budget
+          </option>
+          <option>
+              Climate Change
+            </option>
+            <option>
+                Departmental Inquiry Procedures
+            </option>
+<option>
+    Development Communications
+</option>
+<option>
+Interpersonal Relationships
+</option>
+<option>
+Office Procedures
+</option>
+<option>
+Stress Management
+</option>
+<option>
+
+    Team Building & Motivation
+</option>
+<option>
+    Training on Behavioral Aspects
+
+</option>
+<option>
+Planning Effective Implementation of MGNREGA
+</option>
+<option>
+
+    Retirement Benefits for Government Employees
+</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group" style="text-align: center;">
+    <button class="btn btn-default btn-danger dept_signin" id="submit">Add question</button>
+    <button type="button" class="btn btn-default btn-danger dept_login" id="reset">Reset</button>
+    <button type="button" class="btn btn-default btn-danger dept_login" style="width: auto;" id="sq">Sample question</button>
+  </div>
+  
+</form>
+
+  </div>
+</body>
+<script>
+  // $.post("http://localhost:3000/employee/options",
+  // {results1},
+  //         function (data, status) {
+  //           console.log(data,"res")
+  //         // window.location.assign('/employee/signin')
+  //         }).DONE;
+
+//   let sel1=document.getElementById('sel1')
+//   // <option>dept 1</option>
+//  fetch('/employee/options').then(async (res)=>{
+// res.json().then((res1)=>{
+// let j;
+// res1.results1.forEach(element => {
+// console.log(element.dept_name)
+// j=j+`<option>${element.dept_name}</option>`
+// });
+// sel1.innerHTML=j;
+// }
+//           )})
+let submit=document.getElementById('submit')
+let reset=document.getElementById('reset')
+let sq=document.getElementById('sq')
+
+
+let ques_ans=document.getElementById('ques_ans')
+
+let ques=document.getElementById('ques')
+let ques_opt=document.getElementById('ques_opt')
+let ques_opt1=document.getElementById('ques_opt1')
+let ques_opt2=document.getElementById('ques_opt2')
+let ques_opt3=document.getElementById('ques_opt3')
+
+let text="";
+sq.addEventListener("click",(e)=>{
+let check=prompt("enter question type for  Multi-Choice enter 1 and for Non Multi-Choice enter 0");
+
+    ques.value="in the context of 'Apno Taluko Vibrant Taluko,'' what does the term 'Vibrant Taluko' signify?*"
+    ques_opt.value="Increased Industrialization"
+    ques_opt1.value="Enhanced Educational Facilities"
+    ques_opt2.value="Overall Development and Prosperity"
+    ques_opt3.value="Strict Cultural Preservation"
+        ques_ans.value="c"
+    
+})
+
+reset.addEventListener("click",(e)=>{
+
+    ques.value=""
+    ques_opt.value=""
+    ques_opt1.value=""
+    ques_opt2.value=""
+    ques_opt3.value=""
+        ques_ans.value=""
+        
+    
+    
+})
+
+
+// ques_ans.addEventListener('change',(e)=>{
+//     console.log(e.target.value)
+//     text+=e.target.value
+// })
+submit.addEventListener('click',(e)=>{
+    text=ques_ans.value;
+    text=text.toLowerCase()
+   
+
+    console.log(text," text")
+    if(text=='a' || text=='b' || text=='c' || text=='d'){
+       
+        $.post("/spipa/add-quiz",
+        function (data, status) {
+           
+            window.location.assign('/spipa/add-quiz')
+        }).DONE;
+    }
+    else{
+        console.log("error")
+        alert("Enter valid answer in format")
+       
+
+     e.preventDefault()
+    }
+
+})
+
+
+</script>
+</html>

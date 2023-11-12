@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+<style>
+    select>option {
+        margin-top: 8px !important;
+    }
+
+    .container {
+        border-radius: 10px;
+        padding: 10px 30px 30px;
+        margin-top: 50px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 45%;
+    }
+
+    .emp_signin,
+    .emp_login {
+        width: 100px;
+    }
+
+    .emp_signin {
+        margin-left: 1%;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <p style="font-size: 4rem;margin: 20px 0;text-align: center;font-weight: 600;">Login </p>
+        <form action="/employee/login" method="post">
+
+            <div class="form-group">
+                <label for="emp_id">User ID : </label>
+                <input class="form-control" id="emp_id" type="number" placeholder="User Id" name="login_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="emp_pass">Password :</label>
+                <input class="form-control" id="emp_pass" type="password" placeholder="Password" name="login_password"
+                    required>
+            </div>
+
+            <div class="form-group" style="text-align: center;">
+                <button id="login_button" type="button" class="btn btn-default btn-danger emp_login">Login</button>
+                <br>
+                <hr>
+                <p>Haven't Registered Yet? <a href="/employee/signin" style="color: red;"> Sign In</a></p>
+                <hr>
+                <p>For Department : <a href="/department/signin" style="color: red;">Department Sign In</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        //save and check user and password
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        $(document).ready(function () {
+            $("#login_button").click(function () {
+
+                const login_id = $("#emp_id").val()
+                const login_password = $("#emp_pass").val()
+
+
+                $.post("/employee/login",
+                    {
+                        login_id: $("#emp_id").val(),
+                        login_password: $("#emp_pass").val()
+                    },
+                    function (data, status) {
+                        if (data === login_password) {
+                            setCookie("user", login_id, 1)
+                            setCookie("pass", login_password, 1)
+                            window.location.assign("/employee/test")
+                        }
+                        else {
+                            alert("wrong credidentials")
+                        }
+                    }).done();
+            });
+        });
+    </script>
+</body>
+
+</html>

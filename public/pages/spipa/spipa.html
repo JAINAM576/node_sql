@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
+        integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+
+    <script src="../../js/employee.js"></script>
+    <link href="../../css/index.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div class="row g-0">
+        <section class="col-lg-3 col-md-3 col-sm-3" id="admin-options">
+            <div class="ssip-logo"></div>
+            <div id="options" class="row g-0">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-danger "
+                        onclick="window.location='./employee.html'">Information</button>
+
+                </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#myModal">
+                        Apply for training
+                    </button>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-danger" id="quiz">
+                        Add Quiz
+                    </button>
+                </div>
+
+        </section>
+        <section class="col-lg-9 col-md-12 col-sm-12 offset-lg-3" id="admin-panel">
+            <nav id="nav-laptop">
+                <ul style="justify-self: center;align-self: center;">
+                    <li>
+                        <button style="background-color: var(--ssip-secondary);border-radius: 100px;" type="button"
+                            class="btn" onclick="window.location='/employee/login'">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M27.8426 25.7988C29.4583 23.8549 30.582 21.5505 31.1186 19.0805C31.6553 16.6105 31.5892 14.0476 30.9259 11.6085C30.2626 9.16946 29.0216 6.92605 27.3079 5.06805C25.5942 3.21005 23.4581 1.79214 21.0806 0.934247C18.703 0.0763552 16.1537 -0.196272 13.6485 0.139428C11.1432 0.475128 8.75567 1.40928 6.68781 2.86286C4.61994 4.31644 2.93259 6.24668 1.76849 8.49029C0.604392 10.7339 -0.00220792 13.2249 6.0386e-06 15.7525C0.000855609 19.427 1.29572 22.9838 3.65738 25.7988L3.63488 25.8179C3.71363 25.9124 3.80363 25.9934 3.88463 26.0868C3.98588 26.2027 4.09501 26.3118 4.19963 26.4243C4.51463 26.7663 4.83863 27.0948 5.17838 27.403C5.28188 27.4975 5.38876 27.5853 5.49338 27.6753C5.85338 27.9858 6.22351 28.2805 6.60713 28.555C6.65663 28.5888 6.70163 28.6327 6.75113 28.6675V28.654C9.386 30.5082 12.5292 31.5033 15.7511 31.5033C18.973 31.5033 22.1163 30.5082 24.7511 28.654V28.6675C24.8006 28.6327 24.8445 28.5888 24.8951 28.555C25.2776 28.2794 25.6489 27.9858 26.0089 27.6753C26.1135 27.5853 26.2204 27.4964 26.3239 27.403C26.6636 27.0937 26.9876 26.7663 27.3026 26.4243C27.4073 26.3118 27.5153 26.2027 27.6176 26.0868C27.6975 25.9934 27.7886 25.9124 27.8674 25.8168L27.8426 25.7988ZM15.75 6.75254C16.7513 6.75254 17.7301 7.04945 18.5626 7.60572C19.3951 8.162 20.044 8.95265 20.4271 9.8777C20.8103 10.8028 20.9106 11.8207 20.7152 12.8027C20.5199 13.7847 20.0377 14.6868 19.3297 15.3948C18.6217 16.1028 17.7197 16.5849 16.7377 16.7803C15.7556 16.9756 14.7377 16.8753 13.8127 16.4922C12.8876 16.109 12.097 15.4601 11.5407 14.6276C10.9844 13.7951 10.6875 12.8163 10.6875 11.815C10.6875 10.4724 11.2209 9.18471 12.1703 8.23531C13.1197 7.28591 14.4073 6.75254 15.75 6.75254ZM6.75788 25.7988C6.7774 24.3216 7.3777 22.9115 8.42891 21.8736C9.48012 20.8356 10.8977 20.2533 12.375 20.2525H19.125C20.6023 20.2533 22.0199 20.8356 23.0711 21.8736C24.1223 22.9115 24.7226 24.3216 24.7421 25.7988C22.2748 28.0222 19.0713 29.2526 15.75 29.2526C12.4287 29.2526 9.22518 28.0222 6.75788 25.7988Z"
+                                    fill="white" />
+                            </svg>
+                            <svg style="margin-left: 5px;" width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M5.575 6.55C5.44167 6.55 5.31267 6.525 5.188 6.475C5.06267 6.425 4.95833 6.35833 4.875 6.275L0.275 1.675C0.0916663 1.49167 0 1.25833 0 0.974999C0 0.691666 0.0916663 0.458333 0.275 0.275C0.458333 0.0916663 0.691667 0 0.975 0C1.25833 0 1.49167 0.0916663 1.675 0.275L5.575 4.175L9.475 0.275C9.65833 0.0916663 9.89167 0 10.175 0C10.4583 0 10.6917 0.0916663 10.875 0.275C11.0583 0.458333 11.15 0.691666 11.15 0.974999C11.15 1.25833 11.0583 1.49167 10.875 1.675L6.275 6.275C6.175 6.375 6.06667 6.44567 5.95 6.487C5.83333 6.529 5.70833 6.55 5.575 6.55Z"
+                                    fill="white" />
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <nav id="nav-phone" class="navbar navbar-expand-md">
+                <div class="container-fluid">
+                    <button style="background-color: var(--ssip-secondary);border-radius: 100px;" type="button"
+                        class="btn" onclick="window.location='./login.html'">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M27.8426 25.7988C29.4583 23.8549 30.582 21.5505 31.1186 19.0805C31.6553 16.6105 31.5892 14.0476 30.9259 11.6085C30.2626 9.16946 29.0216 6.92605 27.3079 5.06805C25.5942 3.21005 23.4581 1.79214 21.0806 0.934247C18.703 0.0763552 16.1537 -0.196272 13.6485 0.139428C11.1432 0.475128 8.75567 1.40928 6.68781 2.86286C4.61994 4.31644 2.93259 6.24668 1.76849 8.49029C0.604392 10.7339 -0.00220792 13.2249 6.0386e-06 15.7525C0.000855609 19.427 1.29572 22.9838 3.65738 25.7988L3.63488 25.8179C3.71363 25.9124 3.80363 25.9934 3.88463 26.0868C3.98588 26.2027 4.09501 26.3118 4.19963 26.4243C4.51463 26.7663 4.83863 27.0948 5.17838 27.403C5.28188 27.4975 5.38876 27.5853 5.49338 27.6753C5.85338 27.9858 6.22351 28.2805 6.60713 28.555C6.65663 28.5888 6.70163 28.6327 6.75113 28.6675V28.654C9.386 30.5082 12.5292 31.5033 15.7511 31.5033C18.973 31.5033 22.1163 30.5082 24.7511 28.654V28.6675C24.8006 28.6327 24.8445 28.5888 24.8951 28.555C25.2776 28.2794 25.6489 27.9858 26.0089 27.6753C26.1135 27.5853 26.2204 27.4964 26.3239 27.403C26.6636 27.0937 26.9876 26.7663 27.3026 26.4243C27.4073 26.3118 27.5153 26.2027 27.6176 26.0868C27.6975 25.9934 27.7886 25.9124 27.8674 25.8168L27.8426 25.7988ZM15.75 6.75254C16.7513 6.75254 17.7301 7.04945 18.5626 7.60572C19.3951 8.162 20.044 8.95265 20.4271 9.8777C20.8103 10.8028 20.9106 11.8207 20.7152 12.8027C20.5199 13.7847 20.0377 14.6868 19.3297 15.3948C18.6217 16.1028 17.7197 16.5849 16.7377 16.7803C15.7556 16.9756 14.7377 16.8753 13.8127 16.4922C12.8876 16.109 12.097 15.4601 11.5407 14.6276C10.9844 13.7951 10.6875 12.8163 10.6875 11.815C10.6875 10.4724 11.2209 9.18471 12.1703 8.23531C13.1197 7.28591 14.4073 6.75254 15.75 6.75254ZM6.75788 25.7988C6.7774 24.3216 7.3777 22.9115 8.42891 21.8736C9.48012 20.8356 10.8977 20.2533 12.375 20.2525H19.125C20.6023 20.2533 22.0199 20.8356 23.0711 21.8736C24.1223 22.9115 24.7226 24.3216 24.7421 25.7988C22.2748 28.0222 19.0713 29.2526 15.75 29.2526C12.4287 29.2526 9.22518 28.0222 6.75788 25.7988Z"
+                                fill="white" />
+                        </svg>
+                        <svg style="margin-left: 5px;" width="12" height="7" viewBox="0 0 12 7" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M5.575 6.55C5.44167 6.55 5.31267 6.525 5.188 6.475C5.06267 6.425 4.95833 6.35833 4.875 6.275L0.275 1.675C0.0916663 1.49167 0 1.25833 0 0.974999C0 0.691666 0.0916663 0.458333 0.275 0.275C0.458333 0.0916663 0.691667 0 0.975 0C1.25833 0 1.49167 0.0916663 1.675 0.275L5.575 4.175L9.475 0.275C9.65833 0.0916663 9.89167 0 10.175 0C10.4583 0 10.6917 0.0916663 10.875 0.275C11.0583 0.458333 11.15 0.691666 11.15 0.974999C11.15 1.25833 11.0583 1.49167 10.875 1.675L6.275 6.275C6.175 6.375 6.06667 6.44567 5.95 6.487C5.83333 6.529 5.70833 6.55 5.575 6.55Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="mynavbar">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./employee.html">Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#myModal">
+                                    Apply for training
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/spipa/add-quiz">Add Quiz</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <p class="ssip-title">
+                Information:
+            </p>
+
+            <div style="padding-left: 30px;" id="current-training" class="col-12">
+                <p class="ssip-sub-title">
+                    ->Total training
+                </p>
+                <table style="width: 80%;" id="training-table" class="table table-striped mt-5">
+                </table>
+            </div>
+
+
+            <div style="padding-left: 30px;" id="current-training" class="col-12">
+                <p class="ssip-sub-title">
+                    ->Exam
+                </p>
+                <table style="width: 80%;" id="marks-table" class="table table-striped mt-5">
+                </table>
+            </div>
+
+
+
+
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label for="emp_gender" class="form-label" style="margin-bottom: 0 !important;">Center
+                                :</label>
+                            <select class="form-select form-control" id="emp_gender" name="emp_gender">
+                                <option>Foundation</option>
+                                <option>EDP</option>
+                                <option>Customized</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-12" style="padding-left: 0;">
+                            <label for="emp_gender" class="form-label" style="margin-bottom: 0 !important;">Center
+                                :</label>
+                            <select class="form-select form-control" id="emp_gender" name="emp_gender">
+                                <option>Mehasana</option>
+                                <option>Gandhinagar</option>
+                                <option>Ahemdabad</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="emp_pass">training program:</label>
+                            <select class="form-select form-control" id="emp_gender" name="emp_gender">
+                                <option>t-1</option>
+                                <option>t-2</option>
+                                <option>t-3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="emp_pass">Dates:</label>
+                            <select class="form-select form-control" id="emp_gender" name="emp_gender">
+                                <option>12-6-2023</option>
+                                <option>10-4-2023</option>
+                                <option>28-8-2023</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group" style="text-align: center;">
+                            <button type="button" class="btn btn-default btn-danger emp_login">Apply</button>
+
+                        </div>
+                        <button type="button" onclick="employee_check()">
+
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </section>
+    </div>
+
+</body>
+<script>
+  
+let quiz=  document.getElementById('quiz');
+quiz.addEventListener('click',()=>{
+
+    $.get("/spipa/add-quiz",
+    function (data, status) {
+        console.log(data,"res")
+        window.location.assign('/spipa/add-quiz')
+    }).DONE;
+    
+})
+</script>
+</html>

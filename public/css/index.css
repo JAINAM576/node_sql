@@ -1,0 +1,92 @@
+:root{
+    --ssip-back:#ffffff;
+    --ssip-primary:#E12828;
+    --ssip-secondary:#F5533D;
+    --ssip-front:#010101;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+#admin-options{
+    box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background-color: var(--ssip-back);
+}
+.ssip-logo{
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 250px;
+    margin-bottom: 30px;
+}
+#admin-panel{
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    height: 200vh;
+}
+#nav-laptop{
+    background-color: var(--ssip-primary) !important;
+    height: 100px;
+    display: flex;
+    justify-content: right;
+    padding-right: 8%;
+}
+#options{
+    position: relative;
+}
+#options>div{
+    justify-content: center;
+    display: flex;
+}
+#options button{
+    padding: 8px 32px;
+    margin-bottom: 20px;
+}
+
+#nav-phone{
+     display: none !important;  
+     background-color: var(--ssip-primary); 
+     color: white !important;
+}
+#nav-phone .nav-link{
+    color: #ffffff;
+}
+.ssip-title{
+    font-size: 3rem;
+    margin: 20px 40px;
+}
+.ssip-sub-title{
+    font-size: 2rem;
+    margin: 20px 0px;
+    color: var(--ssip-secondary);
+}
+ul{
+    list-style-type: none;
+}
+@media screen and (max-width:880px) {
+    #admin-options{
+        display: none;
+    }
+    #nav-laptop{
+        display: none !important;
+    }
+    #nav-phone{
+        display: block !important;
+        padding-right: 0 !important;
+    }
+    
+}

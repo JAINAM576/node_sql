@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="../js/login.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+<style>
+  select>option {
+    margin-top: 8px !important;
+  }
+
+  .container {
+    border-radius: 10px;
+    padding: 10px 30px 30px;
+    margin-top: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 45%;
+  }
+  
+  .emp_signin,
+  .emp_login {
+    width: 100px;
+  }
+  
+  .emp_login {
+    margin-left: 3%;
+  }
+  </style>
+
+<body>
+  <div class="container">
+    <p style="font-size: 4rem;margin: 20px 0;text-align: center;font-weight: 600;">Register </p>
+    <form action="/employee/signin" method="post">
+      <div class="form-group">
+        <label for="emp_name">Name : </label>
+        <input class="form-control" id="emp_name" type="text" placeholder="Name" name="emp_name" required>
+      </div>
+      <div class="form-group">
+        <label for="emp_email">Email : </label>
+        <input class="form-control" id="emp_email" type="email" placeholder="Email Address" name="emp_email" required>
+      </div>
+      <div class="form-group">
+        <label for="emp_pn">Phone : </label>
+        <input class="form-control" id="emp_pn" type="tel" placeholder="Phone Number"  name="emp_pn" required>
+      </div>
+      <div class="form-group">
+        <label for="sel1" class="form-label">Department :</label>
+        <select class="form-select form-control" id="sel1" name="emp_department">
+        
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="emp_pass">Password :</label>
+        <input class="form-control" id="emp_pass" type="password" placeholder="Password" name="emp_pass" required >
+      </div>
+      <div class="form-group">
+        <div class="col-lg-6 col-md-12" style="padding-left: 0;">
+          <label for="empBirthDate">Birth Date :</lebel>
+            <div class='input-group date' id='empBirthDate'  style="margin-bottom:0 !important">
+              <input type='date' class="form-control" required name="emp_bDate" />
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-12" style="padding-left: 0;">
+          <label for="emp_gender" class="form-label" style="margin-bottom: 0 !important;">Gender :</label>
+          <select class="form-select form-control" id="emp_gender" name="emp_gender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="text-align: center;">
+        <button class="btn btn-default btn-danger emp_signin">Sign In</button>
+        <a href="/employee/login"><button type="button" class="btn btn-default btn-danger emp_login">Login</button></a>
+      </div>
+    </form>
+
+
+  </div>
+</body>
+<script>
+  // $.post("http://localhost:3000/employee/options",
+  // {results1},
+  //         function (data, status) {
+  //           console.log(data,"res")
+  //         // window.location.assign('/employee/signin')
+  //         }).DONE;
+
+  let sel1=document.getElementById('sel1')
+  // <option>dept 1</option>
+ fetch('/employee/options').then(async (res)=>{
+res.json().then((res1)=>{
+let j;
+res1.results1.forEach(element => {
+console.log(element.dept_name)
+j=j+`<option>${element.dept_name}</option>`
+});
+sel1.innerHTML=j;
+}
+          )})
+</script>
+
+
+
+</html>
