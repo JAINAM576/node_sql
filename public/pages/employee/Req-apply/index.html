@@ -28,7 +28,7 @@
             justify-content: center;
             height: 100%;
             /* filter: blur(1px); */
-            min-height: 100vh;
+            min-height: 100%;
             /* background-color: gray; */
             /* width: 50%; */
             z-index: -1;
@@ -48,7 +48,7 @@
             /* min-height: 100vh; */
             bottom: 50%;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             font-weight: bold;
             display: none;
         }
@@ -67,49 +67,54 @@
         .info {
             padding: 10px 5px;
         }
+        .h{
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
 
+    <h1 class="h">Apply for Trainning</h1>
     <div class="main" id="main">
         <form class="row g-3">
             <label>Center</label>
             <select class="form-select" aria-label="Default select example" id="mainSelect">
-                <option selected>Select center</option>
-                <option value="option1">Foundation</option>
-                <option value="option2">EDP</option>
+                <option selected value="-1">Select center</option>
+                <option value="Foundation">Foundation</option>
+                <option value="EDP">EDP</option>
             </select>
             <label>Center</label>
             <select class="form-select" aria-label="Default select example" id="city">
-
-                <option selected value="1">Ahemdabad</option>
-                <option value="2">Mehsana</option>
-                <option value="3">Rajkot</option>
-                <option value="4">Surat</option>
-                <option value="5">Mumbai</option>
+                <option selected value="-1">Select Location</option>
+                <option  value="Ahemdabad">Ahemdabad</option>
+                <option value="Mehsana">Mehsana</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Surat">Surat</option>
+                <option value="Mumbai">Mumbai</option>
+            </select>
+            <label>Subject:</label>
+            <select class="form-select" disabled aria-label="Default select example" id="subsubject">
+                <option selected value="-1">Open this select menu</option>
+                <option value="suboption1">t1</option>
+               
             </select>
             <label>Trainning Program:</label>
             <select class="form-select" disabled aria-label="Default select example" id="subSelect">
-                <option selected>Open this select menu</option>
-                <option value="suboption1" data-parent="option1">t1</option>
-                <option value="suboption2" data-parent="option1">t2</option>
-                <option value="suboption3" data-parent="option1">t3</option>
-
-                <option value="suboption1" data-parent="option2">t4</option>
-                <option value="suboption2" data-parent="option2">t5</option>
-                <option value="suboption3" data-parent="option2">t6</option>
+                <option selected value="-1">Open this select menu</option>
+                <option value="suboption1" >t1</option>
             </select>
-            <label>Dates:</label>
+            <label>Starting date:</label>
             <select class="form-select" disabled aria-label="Default select example" id="subSelect1">
-                <option selected>Open this select menu</option>
-                <option value="suboption1" data-parent="option1">2020-08-11</option>
-                <option value="suboption2" data-parent="option1">2020-08-11</option>
-                <option value="suboption3" data-parent="option1">2020-08-11</option>
-
-                <option value="suboption1" data-parent="option2">2020-08-11</option>
-                <option value="suboption2" data-parent="option2">2020-08-11</option>
-                <option value="suboption3" data-parent="option2">2020-08-11</option>
+                <option selected value="-1">Open this select menu</option>
+                <option value="suboption1" >2020-08-11</option>
+     
+            </select>
+            <label>Ending date:</label>
+            <select class="form-select" disabled aria-label="Default select example" id="subSelect2">
+                <option selected value="-1">Open this select menu</option>
+                <option value="suboption1" >2020-08-11</option>
+     
             </select>
             <button id="apply-btn" type="button" class="btn btn-danger">Apply</button>
             <button type="button" id="info" class="btn btn-primary">Info</button>
@@ -144,44 +149,124 @@
 
     const mainSelect = document.getElementById('mainSelect');
     const subSelect = document.getElementById('subSelect');
+const subsubject=document.getElementById("subsubject")
+
     const subSelect1 = document.getElementById('subSelect1');
+const subSelect2=document.getElementById('subSelect2')
+
+
     const info = document.getElementById('info')
     const main = document.getElementById('main')
     const main2 = document.getElementById('main2')
     const exit = document.getElementById('exit')
+    let city=document.getElementById("city")
 
 
-    mainSelect.addEventListener('change', function () {
+    city.addEventListener("change",(e)=>{
+        console.log(e.target.value," values")
+        if(e.target.value!=-1){
 
-        const selectedOption = mainSelect.value;
-        //   const optionToEnable = mySelect.querySelector('option[value="option1"]');
-        subSelect.disabled = false
-        subSelect1.disabled = false
-        subSelect.value = "Open this select menu"
-        subSelect1.value = "Open this select menu"
-        for (let i = 0; i < subSelect.options.length; i++) {
-            subSelect.options[i].style.display = 'none';
+let lw=e.target.value;
+lw=lw.toLowerCase()
+console.log(lw)
+
+
+
+let total_sub="<option selected value=-1>Open this select menu</option>"
+$.post("/employee/subject",{lw},
+function (data, status) {
+            console.log(data,"res")
+            data.forEach((element)=>{
+
+            total_sub+=`<option value=${element.tp_subject}>${element.tp_subject}</option>`
+        })
+        subsubject.innerHTML=total_sub
+          // window.location.assign('/employee/signin')
+          subsubject.disabled=false
+          }).DONE;
+
         }
-        for (let i = 0; i < subSelect1.options.length; i++) {
-            subSelect1.options[i].style.display = 'none';
+        else{
+            subsubject.disabled=true
         }
+    })
 
 
-        for (let i = 0; i < subSelect1.options.length; i++) {
-            const option = subSelect1.options[i];
-            if (option.getAttribute('data-parent') === selectedOption) {
-                option.style.display = 'block';
-            }
+    subsubject.addEventListener("change",(e)=>{
+        console.log(e.target.value," values")
+        if(e.target.value!=-1){
+
+let lw=e.target.value;
+lw=lw.toLowerCase()
+console.log(lw)
+
+let total_sub="<option selected value=-1>Open this select menu</option>"
+
+
+$.post("/employee/trainning_name",{lw},
+function (data, status) {
+            console.log(data,"res")
+            let total_sub="<option selected value=-1>Open this select menu</option>"
+            data.forEach((element)=>{
+
+            total_sub+=`<option value=${element.tp_name}>${element.tp_name}</option>`
+        })
+        subSelect.innerHTML=total_sub
+          // window.location.assign('/employee/signin')
+          }).DONE;
+
+
+    subSelect.disabled=false
         }
-
-
-        for (let i = 0; i < subSelect.options.length; i++) {
-            const option = subSelect.options[i];
-            if (option.getAttribute('data-parent') === selectedOption) {
-                option.style.display = 'block';
-            }
+        else{
+            subSelect.disabled=true
         }
-    });
+    })
+
+
+    subSelect.addEventListener("change",(e)=>{
+        console.log(e.target.value," values")
+        if(e.target.value!=-1){
+
+let lw=e.target.value;
+lw=lw.toLowerCase()
+console.log(lw)
+
+let total_sub="<option selected value=-1>Open this select menu</option>"
+
+
+let val1=city.value.toLowerCase();
+
+let val3=subsubject.value.toLowerCase();
+$.post("/employee/date",{lw,val1,val3},
+function (data, status) {
+            console.log(data,"res")
+            let total_sub;
+            let total_sub1;
+            data.forEach((element)=>{
+            
+            total_sub+=`<option value=${element.tp_start_date.slice(0,10)}>${element.tp_start_date.slice(0,10)}</option>`
+            total_sub1+=`<option value=${element.tp_ending_date.slice(0,10)}>${element.tp_ending_date.slice(0,10)}</option>`
+        })
+        subSelect1.innerHTML=total_sub
+        subSelect2.innerHTML=total_sub1
+          // window.location.assign('/employee/signin')
+          }).DONE;
+
+
+   
+        }
+        else{
+            total_sub+=`<option  selected value=-1 >Open this select menu</option>`
+            subSelect1.innerHTML=total_sub
+        subSelect2.innerHTML=total_sub
+            subSelect1.disabled=true
+            subSelect2.disabled=true
+        }
+    })
+
+
+
 
     info.addEventListener('click', () => {
         console.log("hello")
@@ -202,23 +287,31 @@
         $("#apply-btn").click(function () {
             const center = $("#mainSelect").val()
             const city = $("#city").val()
+            const subject = $("#subsubject").val()
             const training = $('#subSelect').val()
-            const dates = $('#subSelect1').val()
+            const staring_date = $('#subSelect1').val()
+const ending_date=$('#subSelect2').val()
+if(center!=-1 && city!=-1 && subject!=-1 && training!=-1 && staring_date!=-1 && ending_date!=-1){
 
-            $.post("/employee/req",
-                {
-                    getUser: getCookie("user"),
+    $.post("/employee/req",
+    {
+        getUser: getCookie("user"),
                     center: $("#mainSelect").val(),
                     city: $("#city").val(),
+                    subject:$('#subsubject').val(),
                     training: $('#subSelect').val(),
-                    dates: $('#subSelect1').val()
+                    starting_date: $('#subSelect1').val(),
+                    ending_date: $('#subSelect2').val(),
+
                 },
                 function (data, status) {
                     console.log("sucsess");
                 }).done();
-        });
+            }
+            });
     });
     function getCookie(cname) {
+        console.log(document.cookie," yummy")
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
         let ca = decodedCookie.split(';');

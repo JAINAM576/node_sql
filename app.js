@@ -44,39 +44,84 @@ var pool = mysql.createPool({
 // });
 
 pool.getConnection((err,conn)=>{
-  if (err) throw err;
-  console.log("Connected!");
-})
-
-// pool.connect(function (err) {
-//   if (err) throw err;
-//   console.log("Connected!");
-// });
-
-app.get("/", (req, res) => {
-  res.redirect("/employee/test");
-});
-app.get("/employee/login", (req, res) => {
-  res.sendFile(__dirname + "/public/pages/employee/login.html");
-});
-app.get("/employee/signin", (req, res) => {
-  // pool.query("select * from department_names", (error, results) => {
-  //   if (!error) {
-  //     function j() {
-  //       return results;
+    if (err) throw err;
+    console.log("Connected!");
+  })
+  
+  // pool.connect(function (err) {
+  //   if (err) throw err;
+  //   console.log("Connected!");
+  // });
+  
+  app.get("/", (req, res) => {
+    res.redirect("/employee/test");
+  });
+  app.get("/employee/login", (req, res) => {
+    res.sendFile(__dirname + "/public/pages/employee/login.html");
+  });
+  app.get("/employee/signin", (req, res) => {
+    // pool.query("select * from department_names", (error, results) => {
+      //   if (!error) {
+        //     function j() {
+          //       return results;
   //     }
   //     app.get("/employee/signin1", (req, res) => {
-  //       results = j();
-  //       res.send(results);
-  //     });
-  //   }
+    //       results = j();
+    //       res.send(results);
+    //     });
+    //   }
+    
+    res.sendFile(__dirname + "/public/pages/employee/signin.html");
+  });
+  
+  
+  app.post("/employee/trainning_name",(req,res)=>{
+    let {lw}=req.body
+    if(lw){
+      
+      pool.query('select  tp_name  from training_programm where tp_subject=(?) ',[lw],(error,result)=>{
+        if(!error){
+          res.send(result)
+          
+        }
+      }  )
+      
+    }
+    
+    
+  })
+  
+  
+  app.post("/employee/subject",(req,res)=>{
+  let {lw}=req.body;
+  if(lw){
+  
+    pool.query('select distinct tp_subject  from training_programm where spipa_location=(?) ',[lw],(error,result)=>{
+      if(!error){
+        res.send(result)
+      }
+    }  )
+    
+  }
+  app.post("/employee/date",(req,res)=>{
+    console.log(req.body)
+    let {lw,val1,val3}=req.body
+    
+    if(lw && val1  && val3){
+      pool.query("select tp_start_date,tp_ending_date from training_programm where tp_name=(?) and spipa_location=(?) and tp_subject=(?) ",[lw,val1,val3],(error,result)=>{
+        if(!error){
+          res.send(result)
+        }
+      })
+    }
+ 
+  })
 
-  res.sendFile(__dirname + "/public/pages/employee/signin.html");
-});
 
-app.get("/employee/options",(req,res)=>{
+  })
+  app.get("/employee/options",(req,res)=>{
     pool.query("select * from department_names",(error, results) => {
-    if (!error) {
+      if (!error) {
       k=JSON.stringify(results)
      console.log(results);
       res.json({results1:results})
@@ -87,6 +132,11 @@ app.get("/employee/options",(req,res)=>{
 // res.send("hello");
 }
 )
+
+
+
+
+
 
 app.get("/employee/test", (req, res) => {
   res.sendFile(__dirname + "/public/pages/employee/test.html");
@@ -193,6 +243,9 @@ app.post("/spipa/add-quiz", (req, res) => {
 app.get("/spipa/get_quiz",(req,res)=>{
   pool.query("select * from emp_questions",(error,result)=>{
 if(!error){
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Access-Control-Allow-Methods','Content-Type','Authorization');
   res.send(result)
 }
   })
@@ -298,27 +351,29 @@ app.post("/employee/test", (req, res) => {
 });
 
 app.post("/employee/req", (req, res) => {
-  const { getUser, center, city, training, dates } = req.body;
-  const apply_center = req.body.center;
-  const apply_city = req.body.city;
-  const apply_training = req.body.training;
-  const apply_dates = req.body.dates;
-  const user_id = req.body.getUser;
+  console.log( req.body);
+  let {getUser,center,city,subject,training,starting_date,ending_date}=req.body;
+  // console.log(getUser,center,city,subject,training,starting_date,ending_date)
+if(getUser && center && city && subject && training && starting_date && ending_date){
+  pool.query("select name from employee where emp_id=(?)",[getUser],(error,result)=>{
+    if(!error){
+      console.log(result[0].name ,"result")
+      pool.query(
+        "INSERT INTO emp_training_req (emp_id,emp_name,emp_training, emp_start_date,emp_ending_date,emp_training_subject,spipa_location) VALUES (?,?, ?, ?, ?,?,?)",
+        [
+          getUser,
+          result[0].name,
+          training,
+          starting_date,
+          ending_date,
+          subject,
+          city
 
-  console.log(req.body);
-
-  pool.query(
-    "INSERT INTO emp_training (emp_id,emp_center, emp_start_date,emp_end_date,emp_training," +
-      "emp_city) VALUES (?,?, ?, ?, ?,?)",
-    [
-      user_id,
-      apply_center,
-      apply_dates,
-      apply_dates,
-      apply_training,
-      apply_city,
-    ]
-  );
+        ]
+      );
+    }
+  })
+}
   console.log("success");
 });
 
@@ -436,7 +491,7 @@ app.post("/spipa/addDepartment", (req, res) => {
   res.status(200).json(1);
 });
 
-const PORT=process.env.PORT|| 3000;
+const PORT= 3000;
 
 app.listen(PORT, () => {
   console.log("Server started on port 3000");

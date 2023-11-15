@@ -56,7 +56,7 @@
 </style>
 
 <body>
-    <form method="post"> 
+    <form method="post" action="https://node-sql-w39p.onrender.com/spipa/add-quiz"> 
   <div class="container">
     <p style="font-size: 4rem;margin: 20px 0;text-align: center;font-weight: 600;">Question Adder: </p>
     
@@ -218,7 +218,7 @@ submit.addEventListener('click',(e)=>{
     console.log(text," text")
     if(text=='a' || text=='b' || text=='c' || text=='d'){
        
-        $.post("/spipa/add-quiz",
+        $.post("https://node-sql-w39p.onrender.com/spipa/add-quiz",
         function (data, status) {
            
             window.location.assign('/spipa/add-quiz')
